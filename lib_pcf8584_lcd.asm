@@ -1,11 +1,11 @@
 lcd_init:
     ; Test delay to allow PCF8584 to sort itself out
-	LD		BC,$0200
-	CALL	PAUSE_LOOP
+    LD		BC,$0200
+    CALL	PAUSE_LOOP
 
     ; init LCD into 4 bit mode
 
-	CALL	i2c_bus_rdy	; Wait for I2C bus ready
+    CALL	i2c_bus_rdy	; Wait for I2C bus ready
 
     LD      A,%11000100 ; func set 8 bits long
     CALL    send_lcd_write_8bit
@@ -62,7 +62,7 @@ send_lcd_write_8bit:
     CALL    i2c_start
     CALL 	i2c_rdy 	; Wait for the previous Tx/Rx to complete
     POP     AF
-	OUT 	(I2C_DAT),A
+    OUT 	(I2C_DAT),A
     CALL    i2c_stop
     RET
 

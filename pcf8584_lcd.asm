@@ -14,7 +14,7 @@ VIA_PORTB:		EQU		$20				; PORT B
 VIA_DDRB:		EQU		$22				; VIA DDRB
 
 I2C_RESET:		EQU     %01000000		; BIT 6 on PORTB will be used for
-										; the reset line on the PCF8584
+                                        ; the reset line on the PCF8584
 
 LCD_ADDR:       EQU     $27
 LCD_RS:         EQU     %00000001
@@ -26,21 +26,21 @@ LCD_BT:         EQU     %00001000
     ;ORG         $0100
 
 I2C_TEST:
-	; Initialise VIA Port B - Set I2C_RESET line as output.
-	LD		A,I2C_RESET
-	OUT		(VIA_DDRB),A
+    ; Initialise VIA Port B - Set I2C_RESET line as output.
+    LD		A,I2C_RESET
+    OUT		(VIA_DDRB),A
 
-	; Perform reset on PCF8584
-	LD		A,$00
-	OUT		(VIA_PORTB),A ; Bring RESET LOW
-	LD		BC,$0020
-	CALL	PAUSE_LOOP
-	LD		A,I2C_RESET
-	OUT		(VIA_PORTB),A ; Bring RESET HIGH
+    ; Perform reset on PCF8584
+    LD		A,$00
+    OUT		(VIA_PORTB),A ; Bring RESET LOW
+    LD		BC,$0020
+    CALL	PAUSE_LOOP
+    LD		A,I2C_RESET
+    OUT		(VIA_PORTB),A ; Bring RESET HIGH
 
-	; Initialise PCF8584
-	CALL	i2c_init
-	
+    ; Initialise PCF8584
+    CALL	i2c_init
+    
     CALL    lcd_init
 
     LD      HL,message
