@@ -1,7 +1,7 @@
 lcd_init:
     ; Test delay to allow PCF8584 to sort itself out
-    LD		BC,$0200
-    CALL	PAUSE_LOOP
+    ; LD		BC,$0200
+    ; CALL	PAUSE_LOOP
 
     ; init LCD into 4 bit mode
 
@@ -16,7 +16,7 @@ lcd_init:
     LD      A,%11000000 ; func set 8 bits long enable
     CALL    send_lcd_write_8bit  
 
-    LD      BC,$0400
+    LD      BC,$0100
     CALL    PAUSE_LOOP  ; pause after each instruction
 
     LD      A,%11000100 ; func set 8 bits long
@@ -88,7 +88,7 @@ send_lcd_write_4bit_instruction:
     OR      LCD_BT
     CALL    send_lcd_write_8bit
 
-    LD      BC,$0400
+    LD      BC,$0100
     CALL    PAUSE_LOOP  ; do a small delay.
     RET
 
@@ -114,6 +114,6 @@ send_lcd_write_4bit_char:
     OR      LCD_RS|LCD_BT
     CALL    send_lcd_write_8bit
 
-    LD      BC,$0400
+    LD      BC,$0100
     CALL    PAUSE_LOOP  ; do a small delay.
     RET
